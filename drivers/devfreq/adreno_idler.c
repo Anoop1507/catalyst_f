@@ -67,11 +67,6 @@ int adreno_idler(struct devfreq_dev_status stats, struct devfreq *devfreq,
 {
 	if (!adreno_idler_active)
 		return 0;
-
-<<<<<<< HEAD
-	display_on = is_display_on();
-=======
->>>>>>> 2c1eb15d... adreno_idler: Use state_notifier instead of display_state
 	if (stats.busy_time < idleworkload) {
 		/* busy_time >= idleworkload should be considered as a non-idle workload. */
 		idlecount++;
@@ -86,14 +81,10 @@ int adreno_idler(struct devfreq_dev_status stats, struct devfreq *devfreq,
 			*freq = devfreq->profile->freq_table[devfreq->profile->max_state - 1];
 			idlecount--;
 			return 1;
-		}
-<<<<<<< HEAD
-=======
 	} else if (state_suspended) {
 		/* GPU shouldn't be used for much while display is off, so ramp down the frequency */
 		*freq = devfreq->profile->freq_table[devfreq->profile->max_state - 1];
 		return 1;
->>>>>>> 2c1eb15d... adreno_idler: Use state_notifier instead of display_state
 	} else {
 		idlecount = 0;
 		/* Do not return 1 here and allow rest of the algorithm to
